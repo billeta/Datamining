@@ -151,3 +151,7 @@ text(scaleUSArrests, label = kmUSArrests$cluster, col = kmUSArrests$cluster)
 #On va regarder comment est calculé chaque centre de gravité
 kmUSArrests$centers
 #Nos intuitions etaient bonne car le cluster 1 sont les points avec le moins d'arrestation et vice-versa
+
+#On peut s'interesser a l'inertie de chaques classes
+kmUSArrests$withinss / kmUSArrests$size
+# Les differentes classes on l'air d'etre plutot bien homogenes
