@@ -6,17 +6,17 @@ S2 = matrix(nrow = 4, ncol = 2, c(2,4,3,5,2,5,3,5), byrow = TRUE)
 Inertia = function(x){
   #We need to compute k
   k = nrow(x)
-  
+  p = ncol(x)
   #Then we compute the average vector
   g = colMeans(x)
   
   #We can then compute the distance
-  i = 0
+  I <- 0
   for (i in 1:k)
-    i = i + sum((x[i,] - g)^2)
+    I <- I + sum((x[i,]-g)^2)
   
   #Finally we return the Inertia
-  i/k
+  I/k
 }
 
 Inertia(S)
@@ -37,3 +37,14 @@ Inertia2 = function(x){
 
 Inertia2(S)
 Inertia2(S2)
+
+
+#Lets create a bigger matrix
+k = 100000
+p = 1000
+  
+S3 = matrix(runif(k*p), k, p)
+
+#We will look at the computation time between the two function
+system.time(Inertia(S))
+system.time(Inertia2(S))
