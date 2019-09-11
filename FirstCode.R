@@ -1,6 +1,7 @@
 S = matrix(nrow = 4, ncol = 2, c(2,3,2.5,3.5,2,3.5,2.5,3), byrow = TRUE )
 S2 = matrix(nrow = 4, ncol = 2, c(2,4,3,5,2,5,3,5), byrow = TRUE)
 
+#DOES NOT WORK DON'T KNOW WHY???
 #Creation of the inertia function
 Inertia = function(x){
   #We need to compute k
