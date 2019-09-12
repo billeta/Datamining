@@ -158,6 +158,7 @@ kmUSArrests$withinss / kmUSArrests$size
 
 #4#
 
+#We load the FactoMineR package that contains the PCA function
 library(FactoMineR)
 
 #We can run a PCA
