@@ -127,7 +127,7 @@ k = 6
 
 #On initialise nos variables qui vont nous etre utile dans notre boucle
 intra = vector()
-
+n = nrow(scaleUSArrests)
 #On creer une boucle pour calculer tout les kmeans jusqu'a k=6 et on regarde l'inertie inter et intra classe
 for (i in 1:k){
   km1 <- kmeans(scaleUSArrests,i)
@@ -154,4 +154,15 @@ kmUSArrests$centers
 
 #On peut s'interesser a l'inertie de chaques classes
 kmUSArrests$withinss / kmUSArrests$size
-# Les differentes classes on l'air d'etre plutot bien homogenes
+# Les differentes classes on l'air d'etre plutot bien homogenes 
+
+#4#
+
+library(FactoMineR)
+
+#We can run a PCA
+pca <- PCA(USArrests)
+
+#Then we plot the clusters that we created
+plot(pca$ind$coord[,1:2], pch="")
+text(pca$ind$coord[,1:2], label = rownames(USArrests), col = kmUSArrests$cluster)
