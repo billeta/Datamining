@@ -1,0 +1,17 @@
+#1#
+#2#
+#3#
+
+#We start by the dependencies
+library(rpart.plot)
+
+#Then we load the data
+data("ptitanic")
+
+?ptitanic
+
+#We are going to look at the survived variable
+class(ptitanic$survived)
+summary(ptitanic$survived)
+#The type of the variable is factor, that means that it take only the value "died" or "survived"
+
