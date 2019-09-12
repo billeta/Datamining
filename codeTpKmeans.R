@@ -163,6 +163,10 @@ library(FactoMineR)
 #We can run a PCA
 pca <- PCA(USArrests)
 
+#We can look at how many component we should take
+plot(pca$eig[,3], type = "l", ylab = "pourcentages expliqué", xlab = "Nombre de composantes")
+#Two component explain most of the dataset as we can see on the plot, so it makes sense to take two principal component
+
 #Then we plot the clusters that we created
 plot(pca$ind$coord[,1:2], pch="")
 text(pca$ind$coord[,1:2], label = rownames(USArrests), col = kmUSArrests$cluster)
