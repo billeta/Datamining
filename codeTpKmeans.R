@@ -137,8 +137,8 @@ for (i in 1:k){
 #On represente graphiquement ce que l'on a calculé afin de regarder combien de clusters seront le plus judicieux
 plot(intra, type="l")
 
-#On remarque que la courbe se coude au niveau de 2 clusters, ce qui signifie que 2 clusters est le nombre ideal
-kmUSArrests <- kmeans(scaleUSArrests, 2)
+#On remarque que la courbe se coude au niveau de 2 clusters, ce qui signifie que 4 clusters est un nombre ideal
+kmUSArrests <- kmeans(scaleUSArrests, 4)
 
 #On va regarder visuellement ces deux clusters
 plot(scaleUSArrests, pch = "")
