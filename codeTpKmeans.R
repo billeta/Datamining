@@ -63,6 +63,8 @@ km$tot.withinss/n
 
 #On va maintenant regarder a l'inertie interclasse
 km$betweenss/n
+#puis l'inertie totale
+(km$betweenss/n) + (mean((km$withinss / km$size)[1]*(95/n) + (km$withinss / km$size)[2]*(105/n)))
 
 #6#
 
@@ -165,7 +167,7 @@ library(FactoMineR)
 pca <- PCA(USArrests)
 
 #We can look at how many component we should take
-plot(pca$eig[,3], type = "l", ylab = "pourcentages expliqué", xlab = "Nombre de composantes")
+plot(pca$eig[,3], type = "l", ylab = "pourcentages expliqués", xlab = "Nombre de composantes")
 #Two component explain most of the dataset as we can see on the plot, so it makes sense to take two principal component
 
 #Then we plot the clusters that we created
