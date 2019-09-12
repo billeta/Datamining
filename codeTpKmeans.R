@@ -166,3 +166,14 @@ pca <- PCA(USArrests)
 #Then we plot the clusters that we created
 plot(pca$ind$coord[,1:2], pch="")
 text(pca$ind$coord[,1:2], label = rownames(USArrests), col = kmUSArrests$cluster)
+
+#we will check if our PCA explain well our dataset
+summary(pca)
+
+#The first two dimension explain 86.750 % of the variance of the dataset, that is a good result
+#dim1 look at the amount of rape, assault and murder. when there is a lot of arrestation the observation
+#will be located in the right part of the plot.
+#The second component looks at the urban population. More a state has a big urban population it will be located on
+#the top of the plot.
+#For example California is a state where there is a lot of arrestations and a big amount of urban population. North Dakota
+#is a really safe state because it is located at the left of the plot
