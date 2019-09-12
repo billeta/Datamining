@@ -16,7 +16,7 @@ d <- scale(USArrests)
 
 #On creer une matrice de distances
 distances <- dist(d)^2/2
-#dist() is computing the euclidian distance, on le mets au carré car on veut que des valeurs positives
+#on veut passer la premiere matrice de distance et non d2^2
 
 #4#
 
@@ -82,3 +82,5 @@ inertie2
 #to categorize the states. (Probably with 4 class we would have urban population affecting some of the class)
 
 #####EXERCICE 2#####
+
+plot(d, col = classe)
