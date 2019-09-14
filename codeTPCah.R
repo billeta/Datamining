@@ -83,4 +83,38 @@ inertie2
 
 #####EXERCICE 2#####
 
-plot(d, col = classe)
+#1#
+
+#We are looking a the pca of the dataset
+library(FactoMineR)
+pcaUSA <- PCA(d)
+
+#Then we can have a look at the plot of the two category with the two first component
+plot(pcaUSA$ind$coord, pch = "")
+text(pcaUSA$ind$coord, labels = names(classe), col = as.vector(classe))
+
+#2#
+
+#We are now going to look at the same plot but with 4 classes
+#Let's first compute the four class
+classe4 <- cutree(h, 4)
+
+#Then we create the new plot
+plot(pcaUSA$ind$coord, pch = "")
+text(pcaUSA$ind$coord, labels = names(classe4), col = as.vector(classe4))
+
+#####EXERCICE 3#####
+
+#Let's check the difference between all the different distances agglomeration methods
+simpleh <- hclust(distances, method = "single")
+completeh <- hclust(distances, method = "complete")
+averageh <- hclust(distances, method = "average")
+
+#Lets look at our graph
+par(mfrow = c(1,3))
+plot(simpleh, main = "single linkage")
+plot(completeh, main = "complete linkage")
+plot(averageh, main = "average linkage")
+par(mfrow = c(1,1))
+
+#We can see that the methods that it used can change the way we create the clusters with the CAH
