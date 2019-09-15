@@ -22,3 +22,11 @@ summary(ptitanic$survived)
 #We will compute our decision tree
 r <- rpart(survived~., data = ptitanic)
 rpart.plot(r)
+
+#Let's take a subset of the male persons in the third class of the titanic
+ex <- subset(ptitanic, sex != "male" & pclass != "3rd") # exemples 
+#We can see how many survived
+summary(ex$survived) 
+
+sum(ex$survived == "survived") / nrow(ex) # proportion de survivants
+nrow(ex) / nrow(ptitanic) # pourcentage relat. `a tous les exemple
