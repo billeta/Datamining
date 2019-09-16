@@ -28,5 +28,6 @@ ex <- subset(ptitanic, sex != "male" & pclass != "3rd") # exemples
 #We can see how many survived
 summary(ex$survived) 
 
+#Then we can check at proportion of survivant
 sum(ex$survived == "survived") / nrow(ex) # proportion de survivants
 nrow(ex) / nrow(ptitanic) # pourcentage relat. `a tous les exemple
