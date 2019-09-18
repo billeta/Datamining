@@ -105,10 +105,13 @@ text(pcaUSA$ind$coord, labels = names(classe4), col = as.vector(classe4))
 
 #####EXERCICE 3#####
 
+#We are first using the euclidean distance
+distances2 <- dist(d)
+
 #Let's check the difference between all the different distances agglomeration methods
-simpleh <- hclust(distances, method = "single")
-completeh <- hclust(distances, method = "complete")
-averageh <- hclust(distances, method = "average")
+simpleh <- hclust(distances2, method = "single")
+completeh <- hclust(distances2, method = "complete")
+averageh <- hclust(distances2, method = "average")
 
 #Lets look at our graph
 par(mfrow = c(1,3))
@@ -118,3 +121,44 @@ plot(averageh, main = "average linkage")
 par(mfrow = c(1,1))
 
 #We can see that the methods that it used can change the way we create the clusters with the CAH
+
+#We can go along and plot the tree with the height graph
+par(mfrow = c(2,3))
+plot(simpleh, main = "single linkage")
+plot(completeh, main = "complete linkage")
+plot(averageh, main = "average linkage")
+plot(rev(simpleh$height)[1:10], type = "b", xlab="number of clusters", ylab = "distance")
+plot(rev(completeh$height)[1:10], type = "b", xlab="number of clusters", ylab = "distance")
+plot(rev(averageh$height)[1:10], type = "b", xlab="number of clusters", ylab = "distance")
+par(mfrow = c(1,1))
+#Plotting every graph of linkage tree with the graph of distances can help figure out
+#how many clusters to take
+
+#Let's cut into groups using the graphs
+simplegroup <- cutree(simpleh, 2)
+completegroup <- cutree(completeh, 4)
+averagegroup <- cutree(averageh, 5)
+
+#And let's plot the cluster using the two first PCA
+
+par(mfrow = c(2,3))
+
+plot(simpleh, main = "single linkage")
+plot(completeh, main = "complete linkage")
+plot(averageh, main = "average linkage")
+
+#Single linkage
+plot(pcaUSA$ind$coord, pch = "", main = "Using 2 clusters")
+text(pcaUSA$ind$coord, labels = names(simplegroup), col = as.vector(simplegroup))
+
+#complete linkage
+plot(pcaUSA$ind$coord, pch = "", main = "Using 4 clusters")
+text(pcaUSA$ind$coord, labels = names(completegroup), col = as.vector(completegroup))
+
+#average linkage
+plot(pcaUSA$ind$coord, pch = "", main = "Using 5 clusters")
+text(pcaUSA$ind$coord, labels = names(averagegroup), col = as.vector(averagegroup))
+
+par(mfrow = c(1,1))
+
+
