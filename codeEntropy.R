@@ -23,3 +23,4 @@ gainMatrix <- matrix(c(M,A,R,E), nrow = 1, ncol = 4, dimnames = list(c("Gain"),
 
 #Let's check the results
 gainMatrix
+#The tree with the highest value of gain is the "A" tree
