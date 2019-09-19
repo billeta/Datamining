@@ -25,6 +25,9 @@ summary(ptitanic$survived)
 #We will compute our decision tree and plot it
 r <- rpart(survived~., data = ptitanic)
 rpart.plot(r)
+#In the box we have the label of the response variable
+#Then, the proportion of the other response variable
+#Finally the proportion of the entire data
 
 #Let's take a subset of the male persons in the third class of the titanic
 ex <- subset(ptitanic, sex != "male" & pclass != "3rd") # exemples 
