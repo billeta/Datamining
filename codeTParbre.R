@@ -179,41 +179,62 @@ summary(Zoo)
 #First let's create the train and test dataset
 set.seed(42)
 
-
-
-sel <- permut.lignes[1:(param.app * n)] # This the line we select for the train dataset
-
-#Creating the test and train subset of the original data
-train <- Zoo[sel,]
-test <- Zoo[-sel,]
-
 #We are going to compute a function that select the best value of cp and minsplit
-best.minsplit.cp <- function(mes.cp = seq(0, 0.1, by = 0.001), mes.minsplit = seq(0, 50, by = 1), dataset){
+best.cp <- function( dataset, nb.cp = 100, mes.minsplit = 20){
+  
+  #initializing cp seq
+  mes.cp = seq(0, 0.1, by = 1/nb.cp)
   
   #Initializing the vectors errors
+  erreur.test.cp = numeric(length(mes.cp))
   
   #Creating test and train
   param.app <- 0.7 # proportion of observation for the training set
   permut.lignes <- sample(n) # we shuffle the row index
-  train <- Zoo[dataset,]
-  test <- Zoo[-dataset,]
+  sel <- permut.lignes[1:(param.app * n)] # This the line we select for the train dataset
+  traindata <- dataset[sel,]
+  testdata <- dataset[-sel,]
   
   #starting the testing
   #Looping for each value of minsplit
+ 
+  #Looping for each value of cp
+  for (i in 1:length(mes.cp)){
+    
+    #Computing the model
+    R <- rpart(type~., data = traindata, cp = mes.cp[i], minsplit = mes.minsplit)
+    
+    #Running prediction
+    pred.surv <- predict(R, newdata = testdata, type = "class")
+    
+    #Computing the confusion matrices
+    mat.conf <- table(testdata$type, pred.surv)
+    
+    #Computing the error
+    erreur.test.cp[i] <- erreur(mat.conf)
+    
+    
+  }
+    
+
+  
+  #Return the results
+  plot(mes.cp, erreur.test.cp, type = "l")
   
 }
 
- 
-  
 
 
+#Creating test and train
+param.app <- 0.7 # proportion of observation for the training set
+permut.lignes <- sample(n) # we shuffle the row index
+sel <- permut.lignes[1:(param.app * n)] # This the line we select for the train dataset
+traindata <- Zoo[sel,]
+testdata <- Zoo[-sel,]
+#lets model that for fun
+R <- rpart(type~., data = traindata, cp = 0.015, minsplit = 10)
 
-  for (i in 1:length(mes.cp)) {
-    r4 <- rpart(survived~., data = train, cp = mes.cp[i], minsplit = minsplit) 
-    pred.surv4 <- predict(r4, newdata = test, type = "class") 
-    mat.conf4 <- table(test$survived, pred.surv4) 
-    erreur.test[i] <- erreur(mat.conf4) 
-  } 
+
 
 
 
